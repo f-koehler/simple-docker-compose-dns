@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  dns:
+    build: .
+    restart: 'unless-stopped'
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - './dnsmasq.conf:/etc/dnsmasq.conf:ro'
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+    extra_hosts:
+      # add your DNS entries here
+      - 'foo.bar:192.168.0.1'
